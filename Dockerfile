@@ -20,7 +20,7 @@ FROM maven:3.8.6-openjdk-11 AS build
 WORKDIR /app
 
 # Copy the built JAR file from the build stage
-COPY --from=build /app/target/Form-0.0.1-SNAPSHOT.jar Form.jar
+COPY --from=build target\Form-0.0.1-SNAPSHOT.jar 
 
 # Expose port 8080 (or change the port if your app uses a different one)
 EXPOSE 8080
