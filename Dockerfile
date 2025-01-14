@@ -1,5 +1,5 @@
 # Use Maven 3.9.5 with OpenJDK 21 for building the project
-FROM maven:3.9.5-openjdk-21 AS build
+FROM maven:3.9.0-openjdk-21 AS build
 
 # Copy your Maven project files into the container
 COPY . .
