@@ -3,7 +3,7 @@ package com.Cascade.Form;
 import com.Cascade.Form.Repository.ContactRepository;
 import com.Cascade.Form.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
