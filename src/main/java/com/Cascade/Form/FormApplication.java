@@ -18,7 +18,7 @@ public class FormApplication  {
 
     public static void main(String[] args) {
         SpringApplication.run(FormApplication.class, args);
-        String connectionString = "mongodb+srv://ashishakteri:7259970933@sparkids.xp6ti.mongodb.net/?retryWrites=true&w=majority&appName=Sparkids";
+//        String connectionString = "mongodb+srv://ashishakteri:7259970933@sparkids.xp6ti.mongodb.net/?retryWrites=true&w=majority&appName=Sparkids";
 
     }
 
