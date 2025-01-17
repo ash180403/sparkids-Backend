@@ -237,6 +237,25 @@ public class UserController {
 
         return ResponseEntity.ok("Job application submitted successfully");
     }
+    
+    @DeleteMapping("/job-application")
+    public ResponseEntity<String> deleteJobApplication(@RequestParam("email") String email) {
+        if (email == null || email.isEmpty()) {
+            return ResponseEntity.badRequest().body("Email is required");
+        }
+
+        Optional<User> jobApplicationOptional = contactRepository.findByEmail(email);
+        if (!jobApplicationOptional.isPresent()) {
+            return ResponseEntity.status(404).body("Job application with the given email does not exist");
+        }
+
+        User jobApplication = jobApplicationOptional.get();
+        contactRepository.delete(jobApplication);
+
+        return ResponseEntity.ok("Job application deleted successfully");
+    }
+
+    
     @GetMapping("/admin/job-application")
     public ResponseEntity<String> getAllJobApplications() {
         List<User> users = contactRepository.findAll();
@@ -278,10 +297,9 @@ public class UserController {
                         .header("Content-Disposition", "attachment; filename=resume.pdf")
                         .body(resumeData);
             } else {
-                return ResponseEntity.status(404).body(null); // No resume data found
-            }
+                return ResponseEntity.status(404).body(null);             }
         } else {
-            return ResponseEntity.status(404).body(null); // User with the given email not found
+            return ResponseEntity.status(404).body(null);
         }
     }
 
