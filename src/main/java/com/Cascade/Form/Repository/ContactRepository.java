@@ -21,6 +21,7 @@ public interface ContactRepository extends MongoRepository<User, String> {
 
     boolean existsByName(String name);
     List<User> findByReason(String reason);
+//    List<User> findByEmail(String email);
 
 
     List<User> findAllByEmailIsNotNull();
