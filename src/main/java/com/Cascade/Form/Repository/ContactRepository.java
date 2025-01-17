@@ -13,7 +13,7 @@ public interface ContactRepository extends MongoRepository<User, String> {
 	boolean existsByEmail(String email);
 
     List<User> findByName(String name);
-    
+    Optional<User> findByContact(String phoneNumber);
     Optional<User> findByEmail(String email);
     Optional<User> findByNameAndContactAndAddress(String name, String contact, String address);
     
