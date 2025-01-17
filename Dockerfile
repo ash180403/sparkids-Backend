@@ -10,7 +10,6 @@ WORKDIR /app
 # Build the project with Maven (skip tests)
 RUN mvn clean package -DskipTests
 
-# Use OpenJDK 21 slim image for the runtime environment
 FROM openjdk:21-slim
 
 # Copy the built JAR file from the build stage
