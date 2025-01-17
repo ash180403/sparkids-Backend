@@ -108,26 +108,29 @@ public class UserController {
 
         return ResponseEntity.ok("Phone number saved successfully");
     }
+    
     @GetMapping("/admin/phoneNumber")
     public ResponseEntity<List<User>> getAllPhoneNumbers() {
         List<User> users = contactRepository.findAllByContactIsNotNull();
         return ResponseEntity.ok(users);
     }
+    
     @DeleteMapping("/delete/phoneNumber")
     public ResponseEntity<String> deletehoneNumber(@RequestParam("phoneNumber") String phoneNumber){
     	if(phoneNumber == null || phoneNumber.isEmpty()) {
     		return ResponseEntity.badRequest().body("Phone Number is required!");
     	}
+    	
     	Optional<User> contactOptional = contactRepository.findByContact(phoneNumber);
     	if(!contactOptional.isPresent()) {
     		return ResponseEntity.status(404).body("Phone Number does not exist!");
     	}
+    	
         User contact = contactOptional.get(); 
     	contactRepository.delete(contact);
     	return ResponseEntity.ok("Phone Number Deleted Successfully!");
     	}
     
-
     
     @PostMapping("/contact")
     public ResponseEntity<String> saveContactForm(
@@ -151,6 +154,28 @@ public class UserController {
 
         return ResponseEntity.ok("Contact form submitted successfully");
     }
+    
+    @DeleteMapping("/delete/contact")
+    public ResponseEntity<String> deleteContact(
+    		@RequestParam("fullName") String fullName,
+    		@RequestParam("phone") String contact,
+    		@RequestParam("email") String email,
+    		@RequestParam("reason") String reason,
+    		@RequestParam("mmessage") String message
+    		) {
+    	
+    	if(email == null || email.isEmpty()) {
+    		return ResponseEntity.badRequest().body("Email is required");
+    	}
+    	Optional<User> contactFormOptional = contactRepository.findByEmail(email);
+    	if(!contactFormOptional.isPresent()) {
+    		return ResponseEntity.status(404).body("User not Found!");
+    	}
+    	User contactForm = contactFormOptional.get();
+    	contactRepository.delete(contactForm);
+    	return ResponseEntity.ok("Contact deleted Successfully!");
+    }
+    
     @GetMapping("/admin/contact")
     public ResponseEntity<String> getAllContactForms() {
         List<User> users = contactRepository.findAll();
@@ -170,11 +195,6 @@ public class UserController {
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(response.toString());
     }
-//    @GetMapping("/contact")
-//    public ResponseEntity<List<ContactForm>> getAllContactForms() {
-//        List<ContactForm> contactForms = contactFormRepository.findAll();
-//        return ResponseEntity.ok(contactForms);
-//    }
 
     
     @PostMapping("/job-application")
