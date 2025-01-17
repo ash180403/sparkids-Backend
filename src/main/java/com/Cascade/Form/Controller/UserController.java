@@ -108,11 +108,25 @@ public class UserController {
 
         return ResponseEntity.ok("Phone number saved successfully");
     }
-    @GetMapping("/admin/phone")
+    @GetMapping("/admin/phoneNumber")
     public ResponseEntity<List<User>> getAllPhoneNumbers() {
         List<User> users = contactRepository.findAllByContactIsNotNull();
         return ResponseEntity.ok(users);
     }
+    @DeleteMapping("/delete/phoneNumber")
+    public ResponseEntity<String> deletehoneNumber(@RequestParam("phoneNumber") String phoneNumber){
+    	if(phoneNumber == null || phoneNumber.isEmpty()) {
+    		return ResponseEntity.badRequest().body("Phone Number is required!");
+    	}
+    	Optional<User> contactOptional = contactRepository.findByContact(phoneNumber);
+    	if(!contactOptional.isPresent()) {
+    		return ResponseEntity.status(404).body("Phone Number does not exist!");
+    	}
+        User contact = contactOptional.get(); 
+    	contactRepository.delete(contact);
+    	return ResponseEntity.ok("Phone Number Deleted Successfully!");
+    	}
+    
 
     
     @PostMapping("/contact")
