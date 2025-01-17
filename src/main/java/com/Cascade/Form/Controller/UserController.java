@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,6 +68,22 @@ public class UserController {
 
         return ResponseEntity.ok("Email saved successfully");
     }
+    @DeleteMapping("/delete/email")
+    public ResponseEntity<String> deleteEmail(@RequestParam("Email") String email) {
+        if (email == null || email.isEmpty()) {
+            return ResponseEntity.badRequest().body("Email is required");
+        }
+        Optional<User> userOptional = contactRepository.findByEmail(email);
+        if (!userOptional.isPresent()) {
+            return ResponseEntity.status(404).body("Email not found in the database");
+        }
+
+        User user = userOptional.get(); 
+        contactRepository.delete(user);
+        return ResponseEntity.ok("Email deleted successfully");
+    }
+
+
     
     @GetMapping("/admin/email")
     public ResponseEntity<List<User>> getAllEmails() {
