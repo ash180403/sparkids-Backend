@@ -34,7 +34,11 @@ public class UserController {
 
     @Autowired
     private ContactRepository contactRepository;
-
+    
+    @GetMapping("/")
+    public ResponseEntity<String> home() {
+        return ResponseEntity.ok("Welcome to the Sparkids API!");
+    }
 
     @PostMapping("/submitForm")
     public String submitForm(@ModelAttribute User user, Model model) {
