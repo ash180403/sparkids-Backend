@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://ash180403.github.io")
 @Tag(name = "User APIs", description = "Add, Read, Update & Delete")
 public class UserController {
 
