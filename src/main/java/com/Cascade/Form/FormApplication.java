@@ -26,7 +26,7 @@ public static class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") 
-                .allowedOrigins("https://ash180403.github.io") 
+                .allowedOrigins("https://cascade-technologies-solutions.github.io/Sparkids-deployed/") 
                 .allowedMethods("GET", "POST", "PUT", "DELETE") 
                 .allowCredentials(true);
     }
